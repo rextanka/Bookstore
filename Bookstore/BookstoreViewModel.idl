@@ -1,0 +1,10 @@
+// BookstoreViewModel.idl
+import "BookSku.idl";
+
+namespace Bookstore
+{
+	runtimeclass BookstoreViewModel : Windows.UI.Xaml.DependencyObject
+	{
+		BookSku BookSku{ get; };
+	}
+}
