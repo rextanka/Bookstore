@@ -34,7 +34,7 @@ template <> struct name<Bookstore::BookSku>{ static constexpr auto & value{ L"Bo
 template <> struct name<Bookstore::BookstoreViewModel>{ static constexpr auto & value{ L"Bookstore.BookstoreViewModel" }; };
 template <> struct name<Bookstore::MainPage>{ static constexpr auto & value{ L"Bookstore.MainPage" }; };
 template <> struct guid<Bookstore::IBookSku>{ static constexpr GUID value{ 0x491D9B3E,0xFDA8,0x5BE2,{ 0x8D,0xAF,0x85,0x39,0xCF,0x39,0x54,0xB0 } }; };
-template <> struct guid<Bookstore::IBookstoreViewModel>{ static constexpr GUID value{ 0xDC4FA358,0x2432,0x5BAA,{ 0x9C,0x19,0xD8,0xB3,0xC7,0x90,0x03,0x40 } }; };
+template <> struct guid<Bookstore::IBookstoreViewModel>{ static constexpr GUID value{ 0x48387433,0xC34F,0x578C,{ 0xB2,0x19,0x4E,0x8C,0x18,0xCC,0x8B,0x44 } }; };
 template <> struct guid<Bookstore::IMainPage>{ static constexpr GUID value{ 0xA5FE0C62,0x3D69,0x5513,{ 0xB1,0xA6,0x33,0x0A,0x1B,0x56,0xB5,0x97 } }; };
 template <> struct default_interface<Bookstore::BookSku>{ using type = Bookstore::IBookSku; };
 template <> struct default_interface<Bookstore::BookstoreViewModel>{ using type = Bookstore::IBookstoreViewModel; };
@@ -52,6 +52,7 @@ template <typename D>
 struct consume_Bookstore_IBookstoreViewModel
 {
     Bookstore::BookSku BookSku() const;
+    Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable> BookSkus() const;
 };
 template <> struct consume<Bookstore::IBookstoreViewModel> { template <typename D> using type = consume_Bookstore_IBookstoreViewModel<D>; };
 
@@ -71,6 +72,7 @@ template <> struct abi<Bookstore::IBookSku>{ struct type : IInspectable
 template <> struct abi<Bookstore::IBookstoreViewModel>{ struct type : IInspectable
 {
     virtual HRESULT __stdcall get_BookSku(void** result) noexcept = 0;
+    virtual HRESULT __stdcall get_BookSkus(void** result) noexcept = 0;
 };};
 
 template <> struct abi<Bookstore::IMainPage>{ struct type : IInspectable

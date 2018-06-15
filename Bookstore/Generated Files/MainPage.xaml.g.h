@@ -29,6 +29,7 @@ namespace winrt::Bookstore::implementation
 
     private:
         bool _contentLoaded{false};
+        class MainPage_obj4_Bindings;
         class MainPage_obj1_Bindings;
 
     };

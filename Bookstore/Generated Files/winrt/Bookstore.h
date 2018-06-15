@@ -13,6 +13,8 @@ static_assert(winrt::check_version(CPPWINRT_VERSION, "1.0.180227.3"), "Mismatche
 #include "winrt/impl/Windows.UI.Xaml.Controls.2.h"
 #include "winrt/impl/Bookstore.2.h"
 
+#include "single_threaded_observable_vector.h"
+
 namespace winrt::impl {
 
 template <typename D> hstring consume_Bookstore_IBookSku<D>::Title() const
@@ -31,6 +33,13 @@ template <typename D> Bookstore::BookSku consume_Bookstore_IBookstoreViewModel<D
 {
     Bookstore::BookSku result{ nullptr };
     check_hresult(WINRT_SHIM(Bookstore::IBookstoreViewModel)->get_BookSku(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable> consume_Bookstore_IBookstoreViewModel<D>::BookSkus() const
+{
+    Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable> result{ nullptr };
+    check_hresult(WINRT_SHIM(Bookstore::IBookstoreViewModel)->get_BookSkus(put_abi(result)));
     return result;
 }
 
@@ -84,6 +93,21 @@ struct produce<D, Bookstore::IBookstoreViewModel> : produce_base<D, Bookstore::I
             *result = nullptr;
             typename D::abi_guard guard(this->shim());
             *result = detach_from<Bookstore::BookSku>(this->shim().BookSku());
+            return S_OK;
+        }
+        catch (...)
+        {
+            return to_hresult();
+        }
+    }
+
+    HRESULT __stdcall get_BookSkus(void** result) noexcept final
+    {
+        try
+        {
+            *result = nullptr;
+            typename D::abi_guard guard(this->shim());
+            *result = detach_from<Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable>>(this->shim().BookSkus());
             return S_OK;
         }
         catch (...)

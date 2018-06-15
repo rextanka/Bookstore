@@ -75,9 +75,168 @@ namespace winrt::Bookstore::implementation
                     element1.Loading({&*bindings, &::XamlBindingInfo::XamlBindings::Loading});
                 }
                 break;
+            case 4: // MainPage.xaml line 15
+                {
+                    auto element4 = target.as<::winrt::Windows::UI::Xaml::Controls::TextBlock>();
+                    auto objBindings = std::make_unique<MainPage_obj4_Bindings>();
+                    objBindings->SetDataRoot(element4.DataContext());
+                    bindings = winrt::make_self<::XamlBindingInfo::XamlBindings>(std::move(objBindings));
+                    bindings->SubscribeForDataContextChanged(element4);
+                    DataTemplate::SetExtensionInstance(element4, bindings.as<::winrt::Windows::UI::Xaml::IDataTemplateExtension>());
+                    XamlBindingHelper::SetDataTemplateComponent(element4, bindings.as<::winrt::Windows::UI::Xaml::Markup::IDataTemplateComponent>());
+                }
+                break;
         }
         return bindings ? bindings.as<::winrt::Windows::UI::Xaml::Markup::IComponentConnector>() : nullptr;
     }
+
+    template <typename D, typename ... I>
+    class MainPageT<D, I...>::MainPage_obj4_Bindings
+        : public ::XamlBindingInfo::ReferenceTypeXamlBindings<::winrt::Bookstore::BookSku, ::XamlBindingInfo::XamlBindingTrackingBase>
+        , public ::XamlBindingInfo::IXamlBindingTracking
+{
+    public:
+        MainPage_obj4_Bindings()
+        {
+            InitializeTracking(this);
+        }
+
+        ~MainPage_obj4_Bindings()
+        {
+            ReleaseAllListeners();
+        }
+
+        void Connect(int32_t connectionId, IInspectable const& target) override
+        {
+            switch(connectionId)
+            {
+            case 4: // MainPage.xaml line 15
+                {
+                    auto targetElement = target.as<::winrt::Windows::UI::Xaml::Controls::TextBlock>();
+                    obj4 = targetElement;
+                }
+                break;
+            }
+        }
+
+        void DisconnectUnloadedObject(int connectionId) override
+        {
+            throw ::winrt::hresult_invalid_argument { L"No unloadable elements to disconnect." };
+        }
+
+        void Recycle() override
+        {
+            ReleaseAllListeners();
+        }
+
+        void ProcessBindings(IInspectable const& item, int itemIndex, int phase, int32_t& nextPhase)
+        {
+            nextPhase = -1;
+            switch (phase)
+            {
+            case 0:
+                {
+                    nextPhase = -1;
+                    SetDataRoot(item);
+                    if (_dataContextChangedToken.value != 0)
+                    {
+                        this->obj4.get().DataContextChanged(_dataContextChangedToken);
+                        _dataContextChangedToken.value = 0;
+                    }
+                    _isInitialized = true;
+                 }
+                 break;
+            }
+            Update_(::winrt::unbox_value<::winrt::Bookstore::BookSku>(item) , 1 << phase);
+        }
+
+
+    private:
+        // Fields for each control that has bindings.
+        ::winrt::weak_ref<::winrt::Windows::UI::Xaml::Controls::TextBlock> obj4;
+
+        // Fields for binding tracking.
+        ::winrt::weak_ref<::winrt::Windows::UI::Xaml::Data::INotifyPropertyChanged> cachePC_;
+        ::winrt::event_token tokenPC_ {};
+
+        // Update methods for each path node used in binding steps.
+
+        void Update_(::winrt::Bookstore::BookSku obj, int32_t phase)
+        {
+            _bindingsTracking->UpdatePropertyChangedListener(obj, cachePC_, tokenPC_);
+            if (obj)
+            {
+                if ((phase & (NOT_PHASED | DATA_CHANGED | (1 << 0))) != 0)
+                {
+                    Update_Title(obj.Title(), phase);
+                }
+            }
+        }
+
+        void Update_Title(::winrt::hstring obj, int32_t phase)
+        {
+            if((phase & ((1 << 0) | NOT_PHASED | DATA_CHANGED)) != 0)
+            {
+                // MainPage.xaml line 15
+                if (obj4)
+                {
+                    Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj4.get(), obj);
+                }
+            }
+        }
+
+        virtual void ReleaseAllListeners() override
+        {
+            _bindingsTracking->UpdatePropertyChangedListener(nullptr, cachePC_, tokenPC_);
+        }
+
+        virtual void PropertyChanged(IInspectable const& sender, ::winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs const& e) override
+        {
+            if (GetDataRoot() && GetDataRoot() == sender)
+            {
+                auto propName = e.PropertyName();
+                auto obj = sender.as<::winrt::Bookstore::BookSku>();
+                if (propName.empty())
+                {
+                    if (obj)
+                    {
+                        Update_Title(obj.Title(), DATA_CHANGED);
+                    }
+                }
+                else if (propName == L"Title")
+                {
+                    if (obj)
+                    {
+                        Update_Title(obj.Title(), DATA_CHANGED);
+                    }
+                }
+            }
+        }
+
+        void CollectionChanged(IInspectable const& sender, ::winrt::Windows::UI::Xaml::Interop::NotifyCollectionChangedEventArgs const& e) override
+        {
+        }
+
+        void VectorChanged(IInspectable const& sender, ::winrt::Windows::Foundation::Collections::IVectorChangedEventArgs const& e) override
+        {
+        }
+
+        void MapChanged(IInspectable const& sender, ::winrt::Windows::Foundation::Collections::IMapChangedEventArgs<::winrt::hstring> const& e) override
+        {
+        }
+
+        void DependencyPropertyChanged(DependencyObject const& sender, DependencyProperty const& prop) override
+        {
+            if (sender)
+            {
+            }
+        }
+
+        static void Set_Windows_UI_Xaml_Controls_TextBlock_Text(::winrt::Windows::UI::Xaml::Controls::TextBlock const& obj, ::winrt::hstring const& value)
+        {
+            obj.Text(value);
+        }
+    }; 
 
     template <typename D, typename ... I>
     class MainPageT<D, I...>::MainPage_obj1_Bindings
@@ -105,6 +264,12 @@ namespace winrt::Bookstore::implementation
                     obj2 = targetElement;
                 }
                 break;
+            case 3: // MainPage.xaml line 12
+                {
+                    auto targetElement = target.as<::winrt::Windows::UI::Xaml::Controls::ListBox>();
+                    obj3 = targetElement;
+                }
+                break;
             }
         }
 
@@ -117,6 +282,7 @@ namespace winrt::Bookstore::implementation
     private:
         // Fields for each control that has bindings.
         ::winrt::Windows::UI::Xaml::Controls::Button obj2 { nullptr };
+        ::winrt::Windows::UI::Xaml::Controls::ListBox obj3 { nullptr };
 
         // Fields for binding tracking.
         ::winrt::Windows::UI::Xaml::Data::INotifyPropertyChanged cachePC_MainViewModel_BookSku{nullptr};
@@ -143,6 +309,10 @@ namespace winrt::Bookstore::implementation
                 {
                     Update_MainViewModel_BookSku(obj.BookSku(), phase);
                 }
+                if ((phase & (NOT_PHASED | (1 << 0))) != 0)
+                {
+                    Update_MainViewModel_BookSkus(obj.BookSkus(), phase);
+                }
             }
         }
 
@@ -164,6 +334,15 @@ namespace winrt::Bookstore::implementation
             {
                 // MainPage.xaml line 11
                 Set_Windows_UI_Xaml_Controls_ContentControl_Content(obj2, ::winrt::box_value(obj), std::nullopt);
+            }
+        }
+
+        void Update_MainViewModel_BookSkus(::winrt::Windows::Foundation::Collections::IVector<::winrt::Windows::Foundation::IInspectable> obj, int32_t phase)
+        {
+            if((phase & ((1 << 0) | NOT_PHASED )) != 0)
+            {
+                // MainPage.xaml line 12
+                Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(obj3, obj, std::nullopt);
             }
         }
 
@@ -221,6 +400,15 @@ namespace winrt::Bookstore::implementation
                 value = ::winrt::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::winrt::xaml_typename<::winrt::Windows::Foundation::IInspectable>(), ::winrt::box_value(::winrt::hstring(targetNullValue.value()))).as<::winrt::Windows::Foundation::IInspectable>();
             }
             obj.Content(value);
+        }
+
+        static void Set_Windows_UI_Xaml_Controls_ItemsControl_ItemsSource(::winrt::Windows::UI::Xaml::Controls::ItemsControl const& obj, ::winrt::Windows::Foundation::IInspectable value, std::optional<::winrt::hstring> const& targetNullValue)
+        {
+            if (!value && targetNullValue)
+            {
+                value = ::winrt::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::winrt::xaml_typename<::winrt::Windows::Foundation::IInspectable>(), ::winrt::box_value(::winrt::hstring(targetNullValue.value()))).as<::winrt::Windows::Foundation::IInspectable>();
+            }
+            obj.ItemsSource(value);
         }
     }; 
 

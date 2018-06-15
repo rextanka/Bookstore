@@ -6,5 +6,7 @@ namespace Bookstore
 	runtimeclass BookstoreViewModel : Windows.UI.Xaml.DependencyObject
 	{
 		BookSku BookSku{ get; };
+		Windows.Foundation.Collections.IVector<IInspectable> BookSkus{ get; };
 	}
+
 }

@@ -7,4 +7,9 @@ namespace winrt::Bookstore::implementation
     {
         throw hresult_not_implemented();
     }
+
+    Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable> BookstoreViewModel::BookSkus()
+    {
+        throw hresult_not_implemented();
+    }
 }

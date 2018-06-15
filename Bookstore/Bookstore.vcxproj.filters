@@ -26,6 +26,7 @@
     <ClInclude Include="MainPage.h" />
     <ClInclude Include="BookSku.h" />
     <ClInclude Include="BookstoreViewModel.h" />
+    <ClInclude Include="single_threaded_observable_vector.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
