@@ -9,5 +9,6 @@ namespace winrt::Bookstore::implementation
         BookstoreViewModel() = delete;
 
         Bookstore::BookSku BookSku();
+        Windows::Foundation::Collections::IVector<Windows::Foundation::IInspectable> BookSkus();
     };
 }

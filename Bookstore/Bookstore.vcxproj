@@ -87,6 +87,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="BookstoreViewModel.h" />
+    <ClInclude Include="single_threaded_observable_vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
